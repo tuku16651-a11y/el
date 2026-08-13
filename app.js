@@ -1,12 +1,12 @@
 /* =============================================
-   SUSHI KATANA — APP.JS
+   EL TORO BURGER — APP.JS
    ============================================= */
 
 'use strict';
 
 // ─── Constants ───────────────────────────────
 const WA_NUMBER = '994559406018';
-const PAGE_SCROLL_MAP = {};   // page -> scrollY before leaving
+const PAGE_SCROLL_MAP = {};
 let currentPage = 'home';
 let currentModalProduct = null;
 let currentVacancy = null;
@@ -15,201 +15,102 @@ let cart = [];
 // ─── DATA ─────────────────────────────────────
 
 const menuData = {
-  sets: [
+  burgers: [
     {
-      id: 's1',
-      name: 'Set N1 — Super Təklif',
-      desc: '70 əd. müxtəlif suşi + 1L Coca-Cola pulsuz! Böyük yığıncaqlar üçün ideal seçim.',
-      price: 29,
-      weight: '70 əd. + 1L Cola',
-      img: 'images/set-n1.jpg',
-      badge: 'Super Təklif'
+      id: 'b1',
+      name: 'Steakhouse Burger',
+      desc: 'Dana əti, hisa verilmiş dana əti dilimi, çeddar pendiri, xiyar turşusu, jelapeno acı bibər, aysberq kahı, özəl burger sousu, 100qr kartof fri',
+      price: 11.90,
+      price2: 14.90,
+      weight: '100qr kartof fri',
+      img: 'images/burger.jpg'
     },
     {
-      id: 's2',
-      name: 'Set N3',
-      desc: '30 əd. müxtəlif suşi — California, Philadelphia, Hot Crab, Hot Salmon, Baked, Maki daxildir.',
-      price: 19,
-      weight: '30 əd.',
-      img: 'images/set-n3.jpg',
-      badge: 'Populyar'
+      id: 'b2',
+      name: 'Crazy Mushroom Burger',
+      desc: 'Dana əti, çeddar pendiri, qaymaqda qızardılmış göbələk, xiyar turşusu, jelapeno acı bibər, aysberq kahı, özəl burger sousu, 100qr kartof fri',
+      price: 11.90,
+      price2: 14.90,
+      weight: '100qr kartof fri',
+      img: 'images/burger.jpg'
     },
     {
-      id: 's3',
-      name: 'Sushi Premium Set',
-      desc: 'Klassik Nigiri, Maki, California Roll — hər şey bir yerdə. Suşi sevənlər üçün ideal set.',
-      price: 29,
-      weight: '6 növ, hər birindən',
-      img: 'images/menu-hero.jpg',
-      badge: 'Klassik'
-    }
-  ],
-  rolls: [
-    {
-      id: 'r1',
-      name: 'California Roll',
-      desc: 'Krab əti, avokado, salatalıq, tobiko kürüsü ilə hazırlanmış klassik uramaki roll.',
-      price: 8,
-      weight: '8 əd.',
-      img: 'images/menu-hero.jpg'
+      id: 'b3',
+      name: 'Juicy Lucy Burger',
+      desc: 'İçi pendir dolğulu dana əti, qırmızı soğan halqaları, pomidor dilimi, xiyar turşusu, jelapeno acı bibər, aysberq kahı, özəl burger sousu, 100qr kartof fri',
+      price: 11.90,
+      price2: 14.90,
+      weight: '100qr kartof fri',
+      img: 'images/burger.jpg'
     },
     {
-      id: 'r2',
-      name: 'Philadelphia Roll',
-      desc: 'Krem pendir, somon, avokado ilə hazırlanmış zəngin dadlı uramaki roll.',
-      price: 9,
-      weight: '8 əd.',
-      img: 'images/gallery1.jpg'
+      id: 'b4',
+      name: 'Chili Bad Boy Burger',
+      desc: 'Dana əti, çeddar pendiri, bolca jelapeno acı bibər, qırmızı soğan halqaları, xiyar turşusu, aysberq kahı, özəl burger sousu (Acının miqdarı istəyə görə seçilə bilər)',
+      price: 11.90,
+      price2: 14.90,
+      weight: '100qr kartof fri',
+      img: 'images/burger.jpg',
+      badge: 'Acılı'
     },
     {
-      id: 'r3',
-      name: 'Hot Crab Roll',
-      desc: 'İsti qızardılmış krab içlikli, xüsusi Katana sousu ilə servis edilən roll.',
-      price: 8,
-      weight: '8 əd.',
-      img: 'images/set-n3.jpg'
+      id: 'b5',
+      name: 'Big Kahuna Burger',
+      desc: 'Dana əti, hisa verilmiş dana əti dilimi, qaymaqda qızardılmış göbələk, xiyar turşusu, jelapeno acı bibər, aysberq kahı, özəl burger sousu',
+      price: 13.90,
+      price2: 16.90,
+      weight: '100qr kartof fri',
+      img: 'images/burger.jpg',
+      badge: 'Böyük'
     },
     {
-      id: 'r4',
-      name: 'Hot Salmon Roll',
-      desc: 'Qızardılmış somon içlikli, wasabi mayonezi ilə servis edilən isti roll.',
-      price: 8,
-      weight: '8 əd.',
-      img: 'images/menu-hero.jpg'
+      id: 'b6',
+      name: 'Black Shelby Burger',
+      desc: 'Dana əti, hisa verilmiş dana əti dilimi, çeddar pendiri, xiyar turşusu, jelapeno acı bibər, aysberq kahı, özəl burger sousu, 100qr kartof fri',
+      price: 12.90,
+      price2: 15.90,
+      weight: '100qr kartof fri',
+      img: 'images/burger.jpg'
     },
     {
-      id: 'r5',
-      name: 'Baked Roll',
-      desc: 'Fırında bişirilmiş, kremli pendir sousu ilə örtülmüş xüsusi Katana rollları.',
-      price: 9,
-      weight: '8 əd.',
-      img: 'images/gallery1.jpg'
+      id: 'b7',
+      name: 'Shelby Rose Burger',
+      desc: 'Dana əti, çeddar pendiri, kremalı qızardılmış göbələk, xiyar turşusu, jelapeno acı bibər, aysberq kahı, özəl burger sousu, 100qr kartof fries',
+      price: 12.90,
+      price2: 15.90,
+      weight: '100qr kartof fri',
+      img: 'images/burger.jpg'
     },
     {
-      id: 'r6',
-      name: 'Spicy Tuna Roll',
-      desc: 'Ədviyyatlı ton balığı, xiyar, sriracha mayonezi ilə hazırlanmış qızğın roll.',
-      price: 9,
-      weight: '8 əd.',
-      img: 'images/set-n3.jpg'
-    },
-    {
-      id: 'r7',
-      name: 'Dragon Roll',
-      desc: 'Karides tempura, avokado, unagi sousu ilə hazırlanmış vizual cəhətdən möhtəşəm roll.',
-      price: 11,
-      weight: '8 əd.',
-      img: 'images/menu-hero.jpg'
-    },
-    {
-      id: 'r8',
-      name: 'Rainbow Roll',
-      desc: 'Krab, avokado California rollu üzərinə somon, ton balığı, karides diləmləri ilə.',
-      price: 12,
-      weight: '8 əd.',
-      img: 'images/gallery1.jpg'
-    }
-  ],
-  nigiri: [
-    {
-      id: 'n1',
-      name: 'Somon Nigiri',
-      desc: 'Təzə Atlantik somonundan hazırlanmış, əl ilə yoğurulmuş pirinc üzərində nigiri.',
-      price: 5,
-      weight: '2 əd.',
-      img: 'images/menu-hero.jpg'
-    },
-    {
-      id: 'n2',
-      name: 'Ton Balığı Nigiri',
-      desc: 'Premium Bluefin ton balığından hazırlanmış, xüsusi mari sousu ilə servis.',
-      price: 6,
-      weight: '2 əd.',
-      img: 'images/menu-hero.jpg'
-    },
-    {
-      id: 'n3',
-      name: 'Karides Nigiri',
-      desc: 'Bişirilmiş böyük karides, pirinc üzərində incə nori ilə bağlanmış nigiri.',
-      price: 5,
-      weight: '2 əd.',
-      img: 'images/menu-hero.jpg'
-    },
-    {
-      id: 'n4',
-      name: 'Unagi Nigiri',
-      desc: 'Şirin-şor teriyaki sousu ilə şüyüdlənmiş tərəvəz balığı (unagi) nigiris.',
+      id: 'b8',
+      name: 'Chicken Crispy Burger',
+      desc: 'Xırçıltılı toyuq əti, çeddar pendiri, xiyar turşusu, pomidor dilimi, özəl burger sousu, 100qr kartof fri',
       price: 7,
-      weight: '2 əd.',
-      img: 'images/menu-hero.jpg'
+      price2: 9,
+      weight: '100qr kartof fri',
+      img: 'images/burger.jpg',
+      badge: 'Toyuq'
+    },
+    {
+      id: 'b9',
+      name: 'Chicken Crispy Mushroom Burger',
+      desc: 'Xırçıltılı toyuq əti, qaymaqda qızardılmış göbələk, çeddar pendiri, xiyar turşusu, pomidor dilimi, özəl burger sousu, 100qr kartof fri',
+      price: 8,
+      price2: 10,
+      weight: '100qr kartof fri',
+      img: 'images/burger.jpg',
+      badge: 'Toyuq'
     }
   ],
-  maki: [
+  kids: [
     {
-      id: 'm1',
-      name: 'Maki Salmon',
-      desc: 'Təzə somon və nori dərinliyindən hazırlanmış sadə, lakin dadlı klassik maki rollları.',
-      price: 5,
-      weight: '10 əd.',
-      img: 'images/menu-hero.jpg'
-    },
-    {
-      id: 'm2',
-      name: 'Maki Ton Balığı',
-      desc: 'Premium ton balığı ilə hazırlanmış ənənəvi Yapon maki rollları.',
-      price: 5,
-      weight: '10 əd.',
-      img: 'images/menu-hero.jpg'
-    },
-    {
-      id: 'm3',
-      name: 'Maki Xiyar',
-      desc: 'Kappa maki — vegeterian seçimi, təzə xiyar ilə hazırlanmış yüngül maki rollları.',
-      price: 4,
-      weight: '10 əd.',
-      img: 'images/menu-hero.jpg'
-    },
-    {
-      id: 'm4',
-      name: 'Maki Avokado',
-      desc: 'Kremli avokado ilə hazırlanmış bitki əsaslı yüngül maki rollları.',
-      price: 4,
-      weight: '10 əd.',
-      img: 'images/menu-hero.jpg'
-    }
-  ],
-  drinks: [
-    {
-      id: 'd1',
-      name: 'Coca-Cola',
-      desc: 'Klassik Coca-Cola — suşi ilə mükəmməl cütlük.',
-      price: 2,
-      weight: '0.33L',
-      img: 'images/set-n1.jpg'
-    },
-    {
-      id: 'd2',
-      name: 'Coca-Cola 1L',
-      desc: 'Böyük Coca-Cola, setlər üçün ideal seçim.',
-      price: 4,
-      weight: '1L',
-      img: 'images/set-n1.jpg'
-    },
-    {
-      id: 'd3',
-      name: 'Yaşıl Çay',
-      desc: 'Ənənəvi Yapon yaşıl çayı — suşi ilə klassik kombinasiya.',
-      price: 3,
-      weight: '400ml',
-      img: 'images/menu-hero.jpg'
-    },
-    {
-      id: 'd4',
-      name: 'Miso Şorba',
-      desc: 'Ənənəvi Yapon miso şorbasıı, tofu və dəniz yosunu ilə.',
-      price: 4,
-      weight: '350ml',
-      img: 'images/menu-hero.jpg'
+      id: 'k1',
+      name: 'Kids Burger',
+      desc: '80 qram dana əti, çeddar pendiri, xiyar turşusu, pomidor dilimi, aysberq kahı, kartof krispi, özəl burger sousu, 100qr kartof fri',
+      price: 7,
+      weight: '100qr kartof fri',
+      img: 'images/burger.jpg',
+      badge: 'Uşaq'
     }
   ]
 };
@@ -240,8 +141,8 @@ const faqData = [
     a: 'Bəli! Şirkətlər, tədbirlər və böyük qruplar üçün xüsusi korporativ menyu və endirim proqramlarımız mövcuddur. WhatsApp vasitəsilə bizimlə əlaqə saxlayın.'
   },
   {
-    q: 'Qablaşdırma necədir? Eco-friendlydir?',
-    a: 'Biz ekoloji cəhətdən təmiz, geri dönüşümlü qablaşdırma materiallarından istifadə edirik. Soyuducu paketlər suşini çatdırılma zamanı ən təzə vəziyyətdə saxlayır.'
+    q: 'Burgerlərin ölçüsünü seçmək olurmu?',
+    a: 'Bəli! Burgerlərimizin əksəriyyəti iki ölçüdə təqdim edilir: standart (11.90–13.90 AZN) və böyük boy (14.90–16.90 AZN). Sifarişdə ölçünüzü bildirin.'
   },
   {
     q: 'Restoranın iş saatları necədir?',
@@ -252,14 +153,14 @@ const faqData = [
 const vacanciesData = [
   {
     id: 'v1',
-    icon: '🍱',
-    title: 'Suşi Ustad (Itamae)',
+    icon: '🍔',
+    title: 'Burger Aşpazı',
     type: 'Tam Ştat',
-    salary: '800 – 1200 AZN',
+    salary: '700 – 1100 AZN',
     schedule: 'Dəyişən növbə (2/2)',
-    requirements: 'Ən az 1 il suşi hazırlama təcrübəsi, gigiyena sertifikatı',
-    desc: 'Katana mütbəxinə peşəkar suşi ustad axtarırıq. Kreativlik, dəqiqlik və komanda ruhu vacibdir.',
-    duties: 'Menyu maddələrinin hazırlanması, freshness nəzarəti, müştəri sifarişlərinin icrasını'
+    requirements: 'Ən az 1 il aşpazlıq təcrübəsi, gigiyena sertifikatı',
+    desc: 'El Toro Burger mətbəxinə peşəkar burger aşpazı axtarırıq. Kreativlik, dəqiqlik və komanda ruhu vacibdir.',
+    duties: 'Menyu məhsullarının hazırlanması, freshness nəzarəti, müştəri sifarişlərinin icrası'
   },
   {
     id: 'v2',
@@ -280,7 +181,7 @@ const vacanciesData = [
     salary: '600 – 900 AZN',
     schedule: 'Dəyişən növbə',
     requirements: 'Kompüter savadlılığı, ünsiyyət bacarığı, 18+ yaş',
-    desc: 'Müştəri xidmətləri üzrə kassir/operator axtarırıq. Qulaqardına vurmamaq, gülərüz olmaq vacibdir.',
+    desc: 'Müştəri xidmətləri üzrə kassir/operator axtarırıq. Gülərüz olmaq vacibdir.',
     duties: 'Sifarişlərin qəbulu, ödəniş əməliyyatları, müştəri məmnuniyyəti'
   },
   {
@@ -301,7 +202,6 @@ const vacanciesData = [
 function showPage(pageId) {
   const oldPage = document.getElementById('page-' + currentPage);
   if (oldPage) {
-    // Save scroll position of current page
     PAGE_SCROLL_MAP[currentPage] = window.scrollY;
     oldPage.classList.remove('active');
   }
@@ -312,18 +212,15 @@ function showPage(pageId) {
   if (!newPage) return;
   newPage.classList.add('active');
 
-  // Update nav active state
   document.querySelectorAll('.nav-link').forEach(link => {
     link.classList.toggle('active', link.dataset.page === pageId);
   });
 
-  // Restore scroll position for the new page
   const savedScroll = PAGE_SCROLL_MAP[pageId] || 0;
   window.scrollTo({ top: savedScroll, behavior: 'instant' });
 }
 
 function goBack() {
-  // Save current scroll
   PAGE_SCROLL_MAP[currentPage] = window.scrollY;
   showPage('home');
 }
@@ -402,13 +299,12 @@ function renderCart() {
   const totalPrice = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
 
   countEl.textContent = totalItems;
-  totalEl.textContent = totalPrice + ' AZN';
+  totalEl.textContent = totalPrice.toFixed(2) + ' AZN';
 
   const isEmpty = cart.length === 0;
   emptyEl.style.display = isEmpty ? 'flex' : 'none';
   footerEl.style.display = isEmpty ? 'none' : 'block';
 
-  // Remove old items (not the empty notice)
   const existingItems = itemsEl.querySelectorAll('.cart-item');
   existingItems.forEach(el => el.remove());
 
@@ -416,10 +312,10 @@ function renderCart() {
     const div = document.createElement('div');
     div.className = 'cart-item';
     div.innerHTML = `
-      <img class="cart-item-img" src="${item.img}" alt="${escHtml(item.name)}" loading="lazy" onerror="this.src='images/menu-hero.jpg'" />
+      <img class="cart-item-img" src="${item.img}" alt="${escHtml(item.name)}" loading="lazy" onerror="this.src='images/burger.jpg'" />
       <div class="cart-item-info">
         <div class="cart-item-name">${escHtml(item.name)}</div>
-        <div class="cart-item-price">${item.price * item.qty} AZN</div>
+        <div class="cart-item-price">${(item.price * item.qty).toFixed(2)} AZN</div>
       </div>
       <div class="cart-item-controls">
         <button class="qty-btn" onclick="changeQty('${item.id}',-1)" aria-label="Azalt">−</button>
@@ -434,7 +330,7 @@ function renderCart() {
 function bumpCartCount() {
   const el = document.getElementById('cartCount');
   el.classList.remove('bump');
-  void el.offsetWidth; // reflow
+  void el.offsetWidth;
   el.classList.add('bump');
   setTimeout(() => el.classList.remove('bump'), 300);
 }
@@ -442,14 +338,14 @@ function bumpCartCount() {
 function sendOrder() {
   if (cart.length === 0) return;
 
-  let msg = '🍱 *YENİ SİFARİŞ — Sushi Katana*\n\n';
+  let msg = '🍔 *YENİ SİFARİŞ — El Toro Burger*\n\n';
   msg += '━━━━━━━━━━━━━━━━━━━━\n';
   cart.forEach((item, idx) => {
-    msg += `${idx + 1}. ${item.name}\n   ${item.qty} × ${item.price} AZN = ${item.qty * item.price} AZN\n`;
+    msg += `${idx + 1}. ${item.name}\n   ${item.qty} × ${item.price.toFixed(2)} AZN = ${(item.qty * item.price).toFixed(2)} AZN\n`;
   });
   const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
   msg += '━━━━━━━━━━━━━━━━━━━━\n';
-  msg += `💰 *CƏMİ: ${total} AZN*\n\n`;
+  msg += `💰 *CƏMİ: ${total.toFixed(2)} AZN*\n\n`;
   msg += '📍 Çatdırılma ünvanınızı yazın.';
 
   const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
@@ -474,16 +370,20 @@ function renderMenuGrids() {
         ? `<div style="position:absolute;top:10px;left:10px;background:var(--accent);color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:100px;z-index:1;">${escHtml(item.badge)}</div>`
         : '';
 
+      const priceDisplay = item.price2
+        ? `${item.price.toFixed(2)} / ${item.price2.toFixed(2)} AZN`
+        : `${item.price.toFixed(2)} AZN`;
+
       card.innerHTML = `
         <div class="menu-card-img">
           ${badgeHtml}
-          <img src="${item.img}" alt="${escHtml(item.name)}" loading="lazy" onerror="this.src='images/menu-hero.jpg'" />
+          <img src="${item.img}" alt="${escHtml(item.name)}" loading="lazy" onerror="this.src='images/burger.jpg'" />
         </div>
         <div class="menu-card-body">
           <div class="menu-card-name">${escHtml(item.name)}</div>
           <div class="menu-card-desc">${escHtml(item.desc)}</div>
           <div class="menu-card-footer">
-            <span class="menu-card-price">${item.price} AZN</span>
+            <span class="menu-card-price">${priceDisplay}</span>
             <button class="add-btn" onclick="event.stopPropagation();addToCart('${item.id}')" aria-label="Səbətə əlavə et">+</button>
           </div>
         </div>
@@ -513,7 +413,10 @@ function openProductModal(product) {
   document.getElementById('modalImg').alt = product.name;
   document.getElementById('modalName').textContent = product.name;
   document.getElementById('modalDesc').textContent = product.desc;
-  document.getElementById('modalPrice').textContent = product.price + ' AZN';
+  const priceDisplay = product.price2
+    ? `${product.price.toFixed(2)} / ${product.price2.toFixed(2)} AZN`
+    : `${product.price.toFixed(2)} AZN`;
+  document.getElementById('modalPrice').textContent = priceDisplay;
   document.getElementById('modalWeight').textContent = product.weight;
   document.getElementById('productModal').classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -532,7 +435,7 @@ function closeProductModalBtn() {
 
 function renderFaq() {
   const list = document.getElementById('faqList');
-  faqData.forEach((item, i) => {
+  faqData.forEach((item) => {
     const el = document.createElement('div');
     el.className = 'faq-item';
     el.innerHTML = `
@@ -551,7 +454,6 @@ function renderFaq() {
 function toggleFaq(btn) {
   const item = btn.closest('.faq-item');
   const isOpen = item.classList.contains('open');
-  // Close all
   document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
   if (!isOpen) item.classList.add('open');
 }
@@ -611,7 +513,7 @@ function closeVacancyModalBtn() {
 
 function applyVacancy() {
   if (!currentVacancy) return;
-  const msg = `👋 *Vakansiyaya Müraciət — Sushi Katana*\n\n🔹 *Vəzifə:* ${currentVacancy.title}\n🔹 *İş rejimi:* ${currentVacancy.type}\n\nSalam! Bu vakansiya ilə maraqlanıram. Əlaqə saxlamaq istəyirəm.`;
+  const msg = `👋 *Vakansiyaya Müraciət — El Toro Burger*\n\n🔹 *Vəzifə:* ${currentVacancy.title}\n🔹 *İş rejimi:* ${currentVacancy.type}\n\nSalam! Bu vakansiya ilə maraqlanıram. Əlaqə saxlamaq istəyirəm.`;
   window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener,noreferrer');
 }
 
@@ -632,7 +534,7 @@ function submitReservation(e) {
   }
 
   const formattedDate = formatDate(date);
-  let msg = `📅 *REZERVASIYA — Sushi Katana*\n\n`;
+  let msg = `📅 *REZERVASIYA — El Toro Burger*\n\n`;
   msg += `━━━━━━━━━━━━━━━━━━━━\n`;
   msg += `👤 *Ad, Soyad:* ${name}\n`;
   msg += `📞 *Telefon:* ${phone}\n`;
@@ -719,7 +621,6 @@ document.addEventListener('DOMContentLoaded', function() {
   renderVacancies();
   renderCart();
 
-  // Set min date for reservation to today
   const today = new Date().toISOString().split('T')[0];
   const resDate = document.getElementById('resDate');
   if (resDate) resDate.min = today;
